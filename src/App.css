@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+.even-pixel{
+  background-color: burlywood;
+}
+
+.odd-pixel{
+  background-color: gray;
+}
+
+.pixel{
+  text-align: center;
+  border: solid;
+  border-color: white;
+}
+
+.selected-pixel{
+  border: solid;
+  border-color: red;
+}
+
+.movable-pixel{
+  border: solid;
+  border-color: blue;
+}
+
+.white-piece{
+  color: white
+}
+
+.black-piece{
+  color: black
+}
+
+table{
+  width: 100%;
+  table-layout: fixed;
+}
