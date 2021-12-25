@@ -1,6 +1,8 @@
 import React from 'react'
 import './App.css'
 
+// import w_bishop from './w_Bishop.png'
+
 const PieceType = { Pawn: 'pawn', Rook: 'rook', Knight: 'knight', Bishop: 'bishop', Queen: 'queen', King: 'king' } as const
 type PieceType = typeof PieceType[keyof typeof PieceType]
 
@@ -39,33 +41,31 @@ class Board {
   constructor() {
     this.pieces = new Array<Piece>()
 
-    for (let i = 0; i < 8; i++) this.pieces.push(new Piece(i, PieceType.Pawn, PieceColor.White))
-    this.pieces.push(new Piece(8, PieceType.Rook, PieceColor.White))
-    this.pieces.push(new Piece(9, PieceType.Knight, PieceColor.White))
-    this.pieces.push(new Piece(10, PieceType.Bishop, PieceColor.White))
-    this.pieces.push(new Piece(11, PieceType.Queen, PieceColor.White))
-    this.pieces.push(new Piece(12, PieceType.King, PieceColor.White))
-    this.pieces.push(new Piece(13, PieceType.Bishop, PieceColor.White))
-    this.pieces.push(new Piece(14, PieceType.Knight, PieceColor.White))
-    this.pieces.push(new Piece(15, PieceType.Rook, PieceColor.White))
+    for (let i = 0; i < 8; i++) this.pieces.push(new Piece(i, PieceType.Pawn, PieceColor.Black))
+    this.pieces.push(new Piece(8, PieceType.Rook, PieceColor.Black))
+    this.pieces.push(new Piece(9, PieceType.Knight, PieceColor.Black))
+    this.pieces.push(new Piece(10, PieceType.Bishop, PieceColor.Black))
+    this.pieces.push(new Piece(11, PieceType.Queen, PieceColor.Black))
+    this.pieces.push(new Piece(12, PieceType.King, PieceColor.Black))
+    this.pieces.push(new Piece(13, PieceType.Bishop, PieceColor.Black))
+    this.pieces.push(new Piece(14, PieceType.Knight, PieceColor.Black))
+    this.pieces.push(new Piece(15, PieceType.Rook, PieceColor.Black))
 
-    for (let i = 16; i < 24; i++) this.pieces.push(new Piece(i, PieceType.Pawn, PieceColor.Black))
-    this.pieces.push(new Piece(24, PieceType.Rook, PieceColor.Black))
-    this.pieces.push(new Piece(25, PieceType.Knight, PieceColor.Black))
-    this.pieces.push(new Piece(26, PieceType.Bishop, PieceColor.Black))
-    this.pieces.push(new Piece(27, PieceType.Queen, PieceColor.Black))
-    this.pieces.push(new Piece(28, PieceType.King, PieceColor.Black))
-    this.pieces.push(new Piece(29, PieceType.Bishop, PieceColor.Black))
-    this.pieces.push(new Piece(30, PieceType.Knight, PieceColor.Black))
-    this.pieces.push(new Piece(31, PieceType.Rook, PieceColor.Black))
+    for (let i = 16; i < 24; i++) this.pieces.push(new Piece(i, PieceType.Pawn, PieceColor.White))
+    this.pieces.push(new Piece(24, PieceType.Rook, PieceColor.White))
+    this.pieces.push(new Piece(25, PieceType.Knight, PieceColor.White))
+    this.pieces.push(new Piece(26, PieceType.Bishop, PieceColor.White))
+    this.pieces.push(new Piece(27, PieceType.Queen, PieceColor.White))
+    this.pieces.push(new Piece(28, PieceType.King, PieceColor.White))
+    this.pieces.push(new Piece(29, PieceType.Bishop, PieceColor.White))
+    this.pieces.push(new Piece(30, PieceType.Knight, PieceColor.White))
+    this.pieces.push(new Piece(31, PieceType.Rook, PieceColor.White))
 
     this.layout = new Array<Array<number>>()
 
     for (let r = 0; r < this.rows; r++) {
       this.layout.push([...Array(this.columns)].map(_ => -1))
     }
-
-    // console.log(this.layout)
 
     for (let i = 0; i < this.columns; i++) this.layout[1][i] = i
     for (let i = 0; i < this.columns; i++) this.layout[0][i] = i + 8
@@ -102,7 +102,7 @@ class App extends React.Component {
 
   constructor(prop: {}) {
     super(prop)
-    this.move = this.move.bind(this)
+    // this.move = this.move.bind(this)
   }
 
   check_movable() {
@@ -115,7 +115,7 @@ class App extends React.Component {
 
     switch (selected_piece.type) {
       case PieceType.Pawn:
-        const direction = color === 'white' ? 1 : -1
+        const direction = color === 'black' ? 1 : -1
         if (board.at(cursor[0] + direction, cursor[1]).id === -1) {
           board.movable.push([cursor[0] + direction, cursor[1]])
 
@@ -147,8 +147,7 @@ class App extends React.Component {
         const rook_direction = [[1, 0], [-1, 0], [0, 1], [0, -1]]
 
         for (let dir of rook_direction) {
-          console.log('==dir==')
-          console.log(dir)
+
           let point: [number, number] = [cursor[0], cursor[1]]
           while (true) {
             point = Object.assign(point)
@@ -189,8 +188,7 @@ class App extends React.Component {
         const biship_direction = [[1, 1], [1, -1], [-1, 1], [-1, -1]]
 
         for (let dir of biship_direction) {
-          console.log('==dir==')
-          console.log(dir)
+
           let point: [number, number] = [cursor[0], cursor[1]]
           while (true) {
             point = Object.assign(point)
@@ -218,8 +216,7 @@ class App extends React.Component {
 
 
         for (let dir of queen_direction) {
-          console.log('==dir==')
-          console.log(dir)
+
           let point: [number, number] = [cursor[0], cursor[1]]
           while (true) {
             point = Object.assign(point)
@@ -240,7 +237,6 @@ class App extends React.Component {
           }
         }
 
-        break
         break
 
       case PieceType.King:
@@ -273,7 +269,7 @@ class App extends React.Component {
 
     const board: Board = Object.assign(this.state.board)
     board.cursor = [r, c]
-    // console.log(board.cursor)
+
     board.selected = true
     this.setState({ board })
 
@@ -293,7 +289,12 @@ class App extends React.Component {
 
   move(r1: number, c1: number, r2: number, c2: number) {
     const board: Board = Object.assign(this.state.board)
-    if (r1 !== r2 || c1 !== c2) {
+
+    let move_ok = true
+    move_ok = move_ok && (board.movable.find(pixel => { return pixel[0] === r2 && pixel[1] === c2 }) !== undefined)
+    move_ok = move_ok && (r1 !== r2 || c1 !== c2)
+
+    if (move_ok) {
       board.layout[r2][c2] = this.state.board.layout[r1][c1]
       board.layout[r1][c1] = -1
     }
@@ -330,7 +331,7 @@ class App extends React.Component {
                     {
                       row.map((col, cindex) =>
                         <td
-                          height="100"
+                          height="50"
                           key={`key${cindex}`}
                           className={this.class_tag(rindex, cindex)}
 

@@ -48,17 +48,19 @@
 .pixel{
   text-align: center;
   border: solid;
-  border-color: white;
+  border-color: black;
+  font-size: x-large;
 }
 
 .selected-pixel{
   border: solid;
   border-color: red;
+  background-color: purple;
 }
 
 .movable-pixel{
   border: solid;
-  border-color: blue;
+  border-color: red;
 }
 
 .white-piece{
