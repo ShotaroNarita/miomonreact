@@ -20,7 +20,7 @@ class Chess extends React.Component {
     }
 
 
-    check_movable() {
+    check_movable(auto = false) {
         const board: Board = Object.assign(this.state.board)
         board.movable = []
 
@@ -170,7 +170,8 @@ class Chess extends React.Component {
                 break
         }
 
-        this.setState({ board })
+        if (!auto)
+            this.setState({ board })
     }
 
     pick(r: number, c: number) {
@@ -223,10 +224,10 @@ class Chess extends React.Component {
             board.layout[r1][c1] = -1
         }
 
-        for(const color of Object.values(PieceColor)){
+        for (const color of Object.values(PieceColor)) {
             const g = board.grave.get(color)
-            if(g !== undefined){
-                if(g.find((pi: number) => board.pieces[pi].type == PieceType.King) !== undefined){
+            if (g !== undefined) {
+                if (g.find((pi: number) => board.pieces[pi].type == PieceType.King) !== undefined) {
                     alert(color + ' lose')
                 }
             }
@@ -252,6 +253,14 @@ class Chess extends React.Component {
         return tags.join(" ")
     }
 
+    random_move(color: PieceColor) {
+        const pieceCands = this.state.board.pieces.filter(p => p.color == color)
+
+        while (true) {
+            
+        }
+    }
+
     pixel_element(r: number, c: number): JSX.Element {
         return <td
             key={`key${c}`}
@@ -259,7 +268,10 @@ class Chess extends React.Component {
 
             onClick={
                 (
-                    () => this.state.board.selected ? this.place(r, c) : this.pick(r, c)
+                    () => {
+                        this.state.board.selected ? this.place(r, c) : this.pick(r, c)
+                        // console.log('aaaaooo')
+                    }
                 )
             }
         >
@@ -279,7 +291,7 @@ class Chess extends React.Component {
             // const image_elm = piece.id === -1 ? "" : <img src={image_path} className='piece-image' alt="" />
 
             rev.push(
-                <div key={color} className={'lose-' + color}>
+                <div key={'grave' + color} className={'lose-' + color}>
                     <h6>{color}</h6>
                     <ul>
                         {
@@ -291,8 +303,6 @@ class Chess extends React.Component {
                         }
                     </ul>
                 </div>)
-
-            rev.push(<hr></hr>)
         }
         return rev
     }
