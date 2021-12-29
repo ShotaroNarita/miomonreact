@@ -1,0 +1,61 @@
+.even-pixel {
+    background-color: #96514d;
+}
+
+.odd-pixel {
+    background-color: #fdeff2;
+}
+
+.pixel {
+    text-align: center;
+    border: solid;
+    border-color: black;
+    font-size: x-large;
+    height: 120px;
+    width: 120px;
+}
+
+.selected-pixel {
+    border: solid;
+    background-color: paleturquoise;
+}
+
+.movable-pixel {
+    border: solid;
+    /* border-color: red; */
+}
+
+.movable-pixel.odd-pixel {
+    background-color: #d0576b;
+}
+
+.movable-pixel.even-pixel {
+    background-color: #c85554;
+}
+
+.white-piece {
+    color: white
+}
+
+.black-piece {
+    color: black
+}
+
+.piece-image {
+    /* height: 40px; */
+    /* width: 40px; */
+    width: 90%;
+    height: 90%;
+}
+
+.piece-image-lose {
+    width: 120px;
+}
+
+.lose-black {
+    background-color: whitesmoke;
+}
+
+.lose-white {
+    background-color: linen;
+}
